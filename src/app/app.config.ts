@@ -1,5 +1,8 @@
-
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  provideBrowserGlobalErrorListeners,
+  provideZonelessChangeDetection,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
@@ -13,14 +16,11 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(routes),
     provideAnimationsAsync(),
-    providePrimeNG({ 
-      theme: { 
-        preset: MyPreset,
-        options: {
-          darkModeSelector: '.dark'
-        }
-      },
-      ripple: true
-    }) 
-  ]
+    // providePrimeNG({
+    //   theme: {
+    //     preset: MyPreset,
+    //   },
+    // }),
+            providePrimeNG({ theme: MyPreset, ripple: true }),
+  ],
 };

@@ -79,4 +79,10 @@ const MyPreset = definePreset(Aura, {
     }
 });
 
-export default MyPreset;
+
+export default {
+    preset: MyPreset,
+    options: {
+        darkModeSelector: '.dark'
+    }
+};
