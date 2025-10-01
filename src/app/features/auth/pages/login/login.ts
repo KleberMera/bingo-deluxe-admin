@@ -4,7 +4,7 @@ import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabelModule } from "primeng/floatlabel"
-
+import { RippleModule } from 'primeng/ripple';
 @Component({
   selector: 'app-login',
   imports: [
@@ -12,7 +12,8 @@ import { FloatLabelModule } from "primeng/floatlabel"
     InputTextModule,
     ButtonModule,
     CheckboxModule,
-    FloatLabelModule
+    FloatLabelModule,
+    RippleModule
   ],
   templateUrl: './login.html',
   styleUrl: './login.css'

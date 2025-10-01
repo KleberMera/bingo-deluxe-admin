@@ -4,6 +4,7 @@ import Aura from '@primeuix/themes/aura';
 
 const MyPreset = definePreset(Aura, {
     semantic: {
+        ripple: true,
         primary: {
             50: '{blue.50}',
             100: '{blue.100}',
