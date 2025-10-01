@@ -2,19 +2,23 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessC
 import { provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
-import Material from '@primeuix/themes/material';
 import { routes } from './app.routes';
+import MyPreset from './mypreset';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes),
-      provideAnimationsAsync(),
-        providePrimeNG({
-            theme: {
-                preset: Material
-            }
-        })
+    provideAnimationsAsync(),
+    providePrimeNG({ 
+      theme: { 
+        preset: MyPreset,
+        // options: {
+        //   darkModeSelector: '.my-app-dark'
+        // }
+      },
+      ripple: true
+    }) 
   ]
 };
