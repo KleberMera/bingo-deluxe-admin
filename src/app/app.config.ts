@@ -1,8 +1,10 @@
+
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
+import Aura from '@primeuix/themes/aura';
 import MyPreset from './mypreset';
 
 export const appConfig: ApplicationConfig = {
@@ -14,10 +16,9 @@ export const appConfig: ApplicationConfig = {
     providePrimeNG({ 
       theme: { 
         preset: MyPreset,
-      
-        // options: {
-        //   darkModeSelector: '.my-app-dark'
-        // }
+        options: {
+          darkModeSelector: '.dark'
+        }
       },
       ripple: true
     }) 
