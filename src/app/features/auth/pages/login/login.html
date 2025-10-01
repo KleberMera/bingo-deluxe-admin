@@ -1,5 +1,5 @@
- <div class="bg-surface-50 dark:bg-surface-950 px-4 py-8 sm:px-6 sm:py-20 md:px-20 lg:px-80 min-h-screen flex items-center">
-            <div class="bg-surface-0 dark:bg-surface-900 p-6 sm:p-8 md:p-12 shadow-sm rounded-2xl w-full max-w-sm mx-auto flex flex-col gap-6 sm:gap-8">
+ <div class="bg-surface-50 dark:bg-surface-950  sm:px-6 min-h-screen flex items-center">
+            <div class="bg-surface-0 dark:bg-surface-900 p-6 sm:p-8 md:p-6 shadow-sm rounded-2xl w-full max-w-sm mx-auto flex flex-col gap-6 sm:gap-8">
                 <div class="flex flex-col items-center gap-4">
                     <div class="flex items-center gap-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14" width="33" height="32" viewBox="0 0 33 32" fill="none">
@@ -12,33 +12,33 @@
                         </svg>
                     </div>
                     <div class="flex flex-col items-center gap-2 w-full">
-                        <div class="text-surface-900 dark:text-surface-0 text-xl sm:text-2xl font-semibold leading-tight text-center w-full">Welcome Back</div>
+                        <div class="text-surface-900 dark:text-surface-0 text-xl sm:text-2xl font-semibold leading-tight text-center w-full">Bienvenido de Nuevo</div>
                         <div class="text-center w-full">
-                            <span class="text-surface-700 dark:text-surface-200 leading-normal text-sm sm:text-base">Don't have an account?</span>
-                            <a class="text-primary font-medium ml-1 cursor-pointer hover:text-primary-emphasis text-sm sm:text-base">Create today!</a>
+                            <span class="text-surface-700 dark:text-surface-200 leading-normal text-sm sm:text-base">¿No tienes una cuenta?</span>
+                            <a class="text-primary font-medium ml-1 cursor-pointer hover:text-primary-emphasis text-sm sm:text-base">¡Créala hoy!</a>
                         </div>
                     </div>
                 </div>
                 <div class="flex flex-col gap-4 sm:gap-6 w-full">
                     <div class="flex flex-col gap-2 w-full">
-                        <label for="email1" class="text-surface-900 dark:text-surface-0 font-medium leading-normal text-sm sm:text-base">Email Address</label>
-                        <input pInputText id="email1" type="text" placeholder="Email address" class="w-full px-3 py-3 shadow-sm rounded-lg text-sm sm:text-base" />
+                        <label for="email1" class="text-surface-900 dark:text-surface-0 font-medium leading-normal text-sm sm:text-base">Correo Electrónico</label>
+                        <input pInputText id="email1" type="text" placeholder="Correo electrónico" class="w-full px-3 py-3 shadow-sm rounded-lg text-sm sm:text-base" />
                     </div>
                     <div class="flex flex-col gap-2 w-full">
-                        <label for="password1" class="text-surface-900 dark:text-surface-0 font-medium leading-normal text-sm sm:text-base">Password</label>
-                        <input pInputText id="password1" type="password" placeholder="Password" class="w-full px-3 py-3 shadow-sm rounded-lg text-sm sm:text-base" />
+                        <label for="password1" class="text-surface-900 dark:text-surface-0 font-medium leading-normal text-sm sm:text-base">Contraseña</label>
+                        <input pInputText id="password1" type="password" placeholder="Contraseña" class="w-full px-3 py-3 shadow-sm rounded-lg text-sm sm:text-base" />
                     </div>
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-3 sm:gap-0">
                         <div class="flex items-center gap-2">
                             <p-checkbox id="rememberme1" [(ngModel)]="checked1" [binary]="true"></p-checkbox>
-                            <label for="rememberme1" class="text-surface-900 dark:text-surface-0 leading-normal text-sm sm:text-base">Remember me</label>
+                            <label for="rememberme1" class="text-surface-900 dark:text-surface-0 leading-normal text-sm sm:text-base">Recuérdame</label>
                         </div>
-                        <a class="text-primary font-medium cursor-pointer hover:text-primary-emphasis text-sm sm:text-base">Forgot your password?</a>
+                        <a class="text-primary font-medium cursor-pointer hover:text-primary-emphasis text-sm sm:text-base">¿Olvidaste tu contraseña?</a>
                     </div>
                 </div>
                 <button pButton class="w-full py-3 rounded-lg flex justify-center items-center gap-2 text-sm sm:text-base font-medium">
                     <i pButtonIcon class="pi pi-user text-base! leading-normal!"></i>
-                    <span pButtonLabel>Sign In</span>
+                    <span pButtonLabel>Iniciar Sesión</span>
                 </button>
             </div>
         </div>
