@@ -1,10 +1,7 @@
 import { Routes } from '@angular/router';
+import PAGES_ROUTES from '../../core/routes/pages.routes';
 
-export enum AUTH_PAGES {
-  LOGIN = '',
-  SIGNUP = 'sign-up',
-  FORGOTPASSWORD = 'forgot-password',
-}
+
 
 export const authRoutes: Routes = [
   {
@@ -13,10 +10,10 @@ export const authRoutes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: AUTH_PAGES.LOGIN,
+        redirectTo: PAGES_ROUTES.AUTH.LOGIN,
       },
       {
-        path: AUTH_PAGES.LOGIN,
+        path: PAGES_ROUTES.AUTH.LOGIN,
         loadComponent: () => import('./pages/login/login'),
       },
     //   {
@@ -32,7 +29,7 @@ export const authRoutes: Routes = [
   },
   {
     path: '**',
-    redirectTo: AUTH_PAGES.LOGIN,
+    redirectTo: PAGES_ROUTES.AUTH.LOGIN,
   },
 ];
 

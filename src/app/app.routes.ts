@@ -1,8 +1,6 @@
 import { Routes } from '@angular/router';
-export enum FEATURE_PAGES {
-  AUTH = 'auth',
-  HOME = 'home',
-}
+import PAGES_ROUTES from './core/routes/pages.routes';
+
 export const routes: Routes = [
   {
     path: '',
@@ -10,16 +8,16 @@ export const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: FEATURE_PAGES.AUTH,
+        redirectTo: PAGES_ROUTES.AUTH.DEFAULT,
       },
       {
-        path: FEATURE_PAGES.AUTH,
+        path: PAGES_ROUTES.AUTH.DEFAULT,
         loadChildren: () => import('./features/auth/auth.routes'),
       },
     ],
   },
   {
     path: '**',
-    redirectTo: FEATURE_PAGES.AUTH,
+    redirectTo: PAGES_ROUTES.AUTH.DEFAULT,
   },
 ];
