@@ -1,11 +1,19 @@
-import { Component } from '@angular/core';
-
+import { Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputTextModule } from 'primeng/inputtext';
 @Component({
   selector: 'app-login',
-  imports: [],
+  imports: [
+    FormsModule,
+    InputTextModule,
+    ButtonModule,
+    CheckboxModule
+  ],
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
 export default class Login {
-
+checked1 = signal<boolean>(true);
 }
