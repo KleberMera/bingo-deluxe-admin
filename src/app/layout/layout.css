@@ -15,6 +15,87 @@
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
+/* Mobile Header Layout */
+@media (max-width: 768px) {
+  .header-fixed {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  
+  /* Layout de 3 columnas para mobile */
+  .header-fixed .flex.md\\:hidden {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    width: 100%;
+  }
+  
+  /* Hamburger button - column 1 */
+  .header-fixed .flex.md\\:hidden > button:first-child {
+    justify-self: start;
+  }
+  
+  /* Logo section - column 2 */
+  .header-fixed .flex.md\\:hidden .flex-1 {
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  
+  /* Options menu - column 3 */
+  .header-fixed .flex.md\\:hidden .flex-shrink-0 {
+    justify-self: end;
+  }
+  
+  /* Reducir tamaño del título en móvil */
+  .header-fixed h1 {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  
+  /* Asegurar que los botones tengan el mismo tamaño */
+  .header-fixed .p-button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  
+  /* Logo size adjustment for mobile */
+  .header-fixed svg {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+  }
+}
+
+/* Extra small screens adjustments */
+@media (max-width: 480px) {
+  .header-fixed h1 {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  
+  .header-fixed svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .header-fixed .flex.md\\:hidden .flex-1 {
+    gap: 8px;
+  }
+  
+  .header-fixed {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
 /* Contenido principal debajo del header */
 .layout-container > div:last-child {
   margin-top: 64px; /* Mismo valor que la altura del header */

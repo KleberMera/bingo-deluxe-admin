@@ -75,12 +75,20 @@ export class Layout implements OnInit {
   onDocumentClick(event: Event) {
     const target = event.target as HTMLElement;
     const sidebar = document.querySelector('.sidebar-transition');
-    const menuButton = document.querySelector('[data-menu-button]');
+    const menuButtons = document.querySelectorAll('[data-menu-button]');
     
     // Si estamos en mobile y el sidebar está visible
     if (this.isMobile() && this.sidebarVisible()) {
-      // Si el clic no fue en el sidebar ni en el botón de menú
-      if (sidebar && !sidebar.contains(target) && menuButton && !menuButton.contains(target)) {
+      // Verificar si el clic fue en algún botón de menú
+      let clickedMenuButton = false;
+      menuButtons.forEach(button => {
+        if (button.contains(target)) {
+          clickedMenuButton = true;
+        }
+      });
+      
+      // Si el clic no fue en el sidebar ni en ningún botón de menú
+      if (sidebar && !sidebar.contains(target) && !clickedMenuButton) {
         this.sidebarVisible.set(false);
       }
     }
