@@ -33,7 +33,7 @@ export const routes: Routes = [
             loadComponent: () => import('./features/dashboard/pages/home/home'),
           },
           {
-            path: '',
+            path: PAGES_ROUTES.DASHBOARD.DEFAULT,
             loadChildren: () => import('./features/tablas/tablas.routes').then(m => m.tablasRoutes),
           },
         ],
