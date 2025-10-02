@@ -8,7 +8,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
 import Aura from '@primeuix/themes/aura';
-import MyPreset from './mypreset';
+import mypreset from './core/types/mypreset';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,8 +19,15 @@ export const appConfig: ApplicationConfig = {
     // providePrimeNG({
     //   theme: {
     //     preset: MyPreset,
+    //     options: {
+    //     darkModeSelector: '.dark',
+    //       cssLayer: {
+    //         name: 'primeng',
+    //         order: 'theme, base, primeng',
+    //       },
+    //     },
     //   },
     // }),
-            providePrimeNG({ theme: MyPreset, ripple: true }),
+    providePrimeNG({ theme: mypreset, ripple: true }),
   ],
 };

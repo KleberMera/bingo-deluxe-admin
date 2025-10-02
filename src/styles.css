@@ -3,17 +3,5 @@
 @plugin "tailwindcss-primeui";
 @import "primeicons/primeicons.css";
 
-@theme {
-  --color-scheme: light dark;
-}
-
-/* Configuración del modo oscuro basado en clase */
-@media (prefers-color-scheme: dark) {
-  :root:not(.light) {
-    color-scheme: dark;
-  }
-}
-
-:root.dark {
-  color-scheme: dark;
-}
+/* Updated dark mode configuration for p-dark */
+@custom-variant dark (&:where(.p-dark, .p-dark *));
