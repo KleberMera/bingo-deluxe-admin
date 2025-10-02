@@ -11,6 +11,7 @@ import { RippleModule } from 'primeng/ripple';
 import { CardModule } from 'primeng/card';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import PAGES_ROUTES from '../core/routes/pages.routes';
 @Component({
   selector: 'app-layout',
   imports: [RouterModule, CommonModule,ButtonModule, MenuModule, AvatarModule, BadgeModule, RippleModule, CardModule ],
@@ -73,7 +74,7 @@ export class Layout implements OnInit {
     {
       label: 'Dashboard',
       icon: 'pi pi-home',
-      route: '/dashboard'
+      route: PAGES_ROUTES.DASHBOARD.DASHBOARD
     },
     {
       label: 'Juegos',

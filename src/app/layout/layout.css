@@ -45,14 +45,59 @@ nav {
   padding-top: 16px; /* Add some top padding since no logo section */
 }
 
+/* Ajustar padding cuando sidebar está colapsado */
+.sidebar-transition.w-16 nav {
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 16px;
+}
+
+/* Ajustar el contenedor de lista cuando está colapsado */
+.sidebar-transition.w-16 nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* Ajustar los elementos li cuando está colapsado */
+.sidebar-transition.w-16 nav ul li {
+  margin: 0;
+  padding: 2px 0;
+}
+
 /* Menu Item Hover Effects */
 .menu-item {
   position: relative;
   border-radius: 8px;
 }
 
+/* Centrar iconos cuando sidebar está colapsado */
+.sidebar-transition.w-16 .menu-item {
+  justify-content: center;
+ /* // padding-left: 0; */
+  padding-right: 0;
+  margin: 4px 0; /* Agregar margen vertical para mejor espaciado */
+  width: 100%; /* Asegurar que ocupe todo el ancho disponible */
+  display: flex; /* Asegurar que sea flex */
+}
+
+/* Asegurar que los iconos tengan el tamaño correcto */
+.sidebar-transition.w-16 .menu-item i {
+  font-size: 20px; /* Aumentar tamaño para mejor visibilidad */
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0; /* Eliminar cualquier margen */
+}
+
 .menu-item:hover {
   transform: translateX(2px);
+}
+
+/* No mover iconos cuando está colapsado */
+.sidebar-transition.w-16 .menu-item:hover {
+  transform: none;
 }
 
 .menu-item::before {
@@ -70,6 +115,11 @@ nav {
 
 .menu-item:hover::before {
   transform: scaleY(1);
+}
+
+/* Ocultar el indicador cuando está colapsado */
+.sidebar-transition.w-16 .menu-item::before {
+  display: none;
 }
 
 /* User Section */
