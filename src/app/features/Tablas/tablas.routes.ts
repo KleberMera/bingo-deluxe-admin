@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import PAGES_ROUTES from '../../core/routes/pages.routes';
 
+
 export const tablasRoutes: Routes = [
   {
     path: PAGES_ROUTES.DASHBOARD.TABLAS.DEFAULT,
@@ -12,4 +13,4 @@ export const tablasRoutes: Routes = [
     ],
   },
 ];
-export default tablasRoutes;
+
