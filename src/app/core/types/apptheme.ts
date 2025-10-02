@@ -102,6 +102,10 @@ const MyTheme= definePreset(Aura, {
 export default {
     preset: MyTheme,
     options: {
-        darkModeSelector: '.p-dark'
+        darkModeSelector: '.p-dark',
+        cssLayer: {
+            name: 'primeng',
+            order: 'theme, base, primeng',
+          },
     }
 };
