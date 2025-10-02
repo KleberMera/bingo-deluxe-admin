@@ -1,5 +1,7 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, HostListener, OnInit } from '@angular/core';
 import { AppConfigService } from '../shared/services/appconfigservice';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
@@ -15,9 +17,57 @@ import { RouterModule } from '@angular/router';
   templateUrl: './layout.html',
   styleUrl: './layout.css'
 })
-export class Layout {
-sidebarVisible = signal<boolean>(true);
+export class Layout implements OnInit {
+  sidebarVisible = signal<boolean>(true);
+  isMobile = signal<boolean>(false);
   protected readonly configService = inject(AppConfigService);
+  private readonly router = inject(Router);
+
+  ngOnInit() {
+    this.checkScreenSize();
+    
+    // Cerrar sidebar en móvil cuando se navega a una nueva ruta
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        if (this.isMobile()) {
+          this.sidebarVisible.set(false);
+        }
+      });
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.checkScreenSize();
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event) {
+    const target = event.target as HTMLElement;
+    const sidebar = document.querySelector('.sidebar-transition');
+    const menuButton = document.querySelector('[data-menu-button]');
+    
+    // Si estamos en mobile y el sidebar está visible
+    if (this.isMobile() && this.sidebarVisible()) {
+      // Si el clic no fue en el sidebar ni en el botón de menú
+      if (sidebar && !sidebar.contains(target) && menuButton && !menuButton.contains(target)) {
+        this.sidebarVisible.set(false);
+      }
+    }
+  }
+
+  private checkScreenSize() {
+    const isMobileSize = window.innerWidth <= 768;
+    this.isMobile.set(isMobileSize);
+    
+    // Si cambiamos a móvil, ocultar sidebar por defecto
+    if (isMobileSize) {
+      this.sidebarVisible.set(false);
+    } else {
+      // Si cambiamos a desktop, mostrar sidebar por defecto
+      this.sidebarVisible.set(true);
+    }
+  }
 
   menuItems = [
     {

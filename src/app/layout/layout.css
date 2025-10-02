@@ -1,0 +1,221 @@
+/* Layout Container */
+.layout-container {
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Header Fijo */
+.header-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px; /* Altura fija del header */
+  z-index: 1000;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+/* Contenido principal debajo del header */
+.layout-container > div:last-child {
+  margin-top: 64px; /* Mismo valor que la altura del header */
+  height: calc(100vh - 64px);
+}
+
+/* Sidebar Transitions */
+.sidebar-transition {
+  transition: width 0.3s ease-in-out;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Menu Text Transitions */
+.menu-text-transition {
+  transition: all 0.3s ease-in-out;
+}
+
+.user-text-transition {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Navigation Styles */
+nav {
+  height: calc(100% - 64px); /* Total height minus user section */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: 16px; /* Add some top padding since no logo section */
+}
+
+/* Menu Item Hover Effects */
+.menu-item {
+  position: relative;
+  border-radius: 8px;
+}
+
+.menu-item:hover {
+  transform: translateX(2px);
+}
+
+.menu-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: var(--primary-color);
+  border-radius: 0 2px 2px 0;
+  transform: scaleY(0);
+  transition: transform 0.2s ease-in-out;
+}
+
+.menu-item:hover::before {
+  transform: scaleY(1);
+}
+
+/* User Section */
+.user-section {
+  height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+/* Main Content Area */
+.main-content {
+  height: 100%;
+  position: relative;
+}
+
+/* Custom Scrollbar */
+nav::-webkit-scrollbar {
+  width: 4px;
+}
+
+nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+nav::-webkit-scrollbar-thumb {
+  background: rgba(var(--surface-400), 0.3);
+  border-radius: 2px;
+}
+
+nav::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--surface-400), 0.5);
+}
+
+/* Dark mode scrollbar */
+:host-context(.dark) nav::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+:host-context(.dark) nav::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar-transition {
+    position: fixed;
+    left: 0;
+    top: 64px; /* Debajo del header */
+    height: calc(100vh - 64px);
+    z-index: 999;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+    width: 280px !important;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .sidebar-transition.w-64 {
+    transform: translateX(0);
+  }
+  
+  .sidebar-transition.w-16 {
+    transform: translateX(-100%);
+  }
+  
+  .main-content {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+}
+
+/* Overlay para móvil cuando sidebar esté abierto */
+@media (max-width: 768px) {
+  .layout-container::before {
+    content: '';
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    pointer-events: none;
+  }
+  
+  /* Mostrar overlay cuando sidebar esté visible en móvil */
+  .layout-container.mobile-sidebar-open::before {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
+/* Loading Animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.layout-container {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Focus Styles */
+.menu-item:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Enhanced Shadows */
+.header-fixed {
+  backdrop-filter: blur(8px);
+}
+
+:host-context(.dark) .header-fixed {
+  background: rgba(var(--surface-900), 0.95);
+}
+
+:host-context(.light) .header-fixed {
+  background: rgba(var(--surface-0), 0.95);
+}
+
+/* Smooth Transitions for Theme Changes */
+* {
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+/* Logo Font Weight */
+.logo-section h2 {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+/* Perfect Alignment Classes */
+.perfectly-aligned {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  padding-right: 24px;
+}
