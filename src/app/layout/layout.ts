@@ -21,8 +21,37 @@ import PAGES_ROUTES from '../core/routes/pages.routes';
 export class Layout implements OnInit {
   sidebarVisible = signal<boolean>(true);
   isMobile = signal<boolean>(false);
+  notificationsCount = signal<number>(3);
   protected readonly configService = inject(AppConfigService);
   private readonly router = inject(Router);
+  
+  isDarkMode = computed(() => this.configService.appState().darkTheme);
+
+  // Menú de opciones para móvil
+  mobileMenuItems = computed(() => [
+    {
+      label: `Notificaciones ${this.notificationsCount() > 0 ? `(${this.notificationsCount()})` : ''}`,
+      icon: 'pi pi-bell',
+      command: () => this.openNotifications(),
+      styleClass: this.notificationsCount() > 0 ? 'mobile-menu-notifications' : ''
+    },
+    {
+      separator: true
+    },
+    {
+      label: this.isDarkMode() ? 'Modo Claro' : 'Modo Oscuro',
+      icon: this.isDarkMode() ? 'pi pi-sun' : 'pi pi-moon',
+      command: () => this.toggleDarkMode()
+    },
+    {
+      separator: true
+    },
+    {
+      label: 'Perfil de Usuario',
+      icon: 'pi pi-user',
+      command: () => this.openUserProfile()
+    }
+  ]);
 
   ngOnInit() {
     this.checkScreenSize();
@@ -112,13 +141,24 @@ export class Layout implements OnInit {
     { title: 'Total Cartones', value: '1,856', icon: 'pi pi-grid', color: 'text-orange-500' }
   ];
 
-  isDarkMode = computed(() => this.configService.appState().darkTheme);
-
   toggleSidebar() {
     this.sidebarVisible.update(visible => !visible);
   }
 
   toggleDarkMode() {
     this.configService.appState.update((state) => ({ ...state, darkTheme: !state.darkTheme }));
+  }
+
+  openNotifications() {
+    console.log('Abrir notificaciones');
+    // Simular que se leyeron las notificaciones
+    this.notificationsCount.set(0);
+    // Aquí puedes implementar la lógica para abrir las notificaciones
+  }
+
+  openUserProfile() {
+    console.log('Abrir perfil de usuario');
+    // Aquí puedes implementar la lógica para abrir el perfil
+    this.router.navigate(['/dashboard/profile']);
   }
 }
