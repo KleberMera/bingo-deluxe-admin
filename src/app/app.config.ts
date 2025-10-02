@@ -7,8 +7,8 @@ import { provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
-import Aura from '@primeuix/themes/aura';
-import mypreset from './core/types/mypreset';
+
+import MyTheme from './core/types/apptheme';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,6 +28,6 @@ export const appConfig: ApplicationConfig = {
     //     },
     //   },
     // }),
-    providePrimeNG({ theme: mypreset, ripple: true }),
+    providePrimeNG({ theme: MyTheme, ripple: true }),
   ],
 };

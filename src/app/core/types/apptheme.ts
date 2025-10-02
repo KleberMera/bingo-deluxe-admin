@@ -46,7 +46,7 @@ import Aura from '@primeuix/themes/aura';
 //         darkModeSelector: '.dark'
 //     }
 // };
-const MyPreset = definePreset(Aura, {
+const MyTheme= definePreset(Aura, {
   semantic: {
     primary: {
       50: '{blue.50}',
@@ -100,7 +100,7 @@ const MyPreset = definePreset(Aura, {
 //export default MyPreset;
 
 export default {
-    preset: MyPreset,
+    preset: MyTheme,
     options: {
         darkModeSelector: '.p-dark'
     }
