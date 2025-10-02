@@ -34,7 +34,7 @@ export const routes: Routes = [
           },
           {
             path: '',
-            loadChildren: () => import('./features/Tablas/tablas.routes'),
+            loadChildren: () => import('./features/tablas/tablas.routes'),
           },
         ],
       },
