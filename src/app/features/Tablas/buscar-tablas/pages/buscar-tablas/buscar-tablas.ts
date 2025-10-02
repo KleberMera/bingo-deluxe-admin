@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './buscar-tablas.html',
   styleUrl: './buscar-tablas.css'
 })
-export class BuscarTablas {
+export default class BuscarTablas {
 
 }

@@ -54,7 +54,7 @@ export default class Login {
     setTimeout(() => {
       this.showLoginDialog.set(false);
       // Redirigir al dashboard después del login exitoso
-      this.router.navigate([PAGES_ROUTES.DASHBOARD.DEFAULT]);
+      this.router.navigate([PAGES_ROUTES.DASHBOARD.DASHBOARD]);
     }, 2000);
   }
 }

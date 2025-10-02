@@ -1,16 +1,17 @@
 export const PAGES_ROUTES = {
   AUTH: {
-    DEFAULT : 'auth',
+    DEFAULT: 'auth',
     LOGIN: 'login',
     SIGNUP: 'sign-up',
     FORGOTPASSWORD: 'forgot-password',
   },
   DASHBOARD: {
-    DEFAULT: 'home',
+    DEFAULT: '',
     DASHBOARD: 'dashboard',
-    GAMES: 'games',
-    USERS: 'users',
-    SETTINGS: 'settings',
+    TABLAS: {
+      DEFAULT: 'tablas',
+      BUSCAR_TABLA: 'buscar-tablas',
+    }
   },
 };
 export default PAGES_ROUTES;

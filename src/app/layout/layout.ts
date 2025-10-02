@@ -14,9 +14,18 @@ import { RouterModule } from '@angular/router';
 import PAGES_ROUTES from '../core/routes/pages.routes';
 @Component({
   selector: 'app-layout',
-  imports: [RouterModule, CommonModule,ButtonModule, MenuModule, AvatarModule, BadgeModule, RippleModule, CardModule ],
+  imports: [
+    RouterModule,
+    CommonModule,
+    ButtonModule,
+    MenuModule,
+    AvatarModule,
+    BadgeModule,
+    RippleModule,
+    CardModule,
+  ],
   templateUrl: './layout.html',
-  styleUrl: './layout.css'
+  styleUrl: './layout.css',
 })
 export class Layout implements OnInit {
   sidebarVisible = signal<boolean>(true);
@@ -24,46 +33,46 @@ export class Layout implements OnInit {
   notificationsCount = signal<number>(3);
   protected readonly configService = inject(AppConfigService);
   private readonly router = inject(Router);
-  
+
   isDarkMode = computed(() => this.configService.appState().darkTheme);
 
   // Menú de opciones para móvil
   mobileMenuItems = computed(() => [
     {
-      label: `Notificaciones ${this.notificationsCount() > 0 ? `(${this.notificationsCount()})` : ''}`,
+      label: `Notificaciones ${
+        this.notificationsCount() > 0 ? `(${this.notificationsCount()})` : ''
+      }`,
       icon: 'pi pi-bell',
       command: () => this.openNotifications(),
-      styleClass: this.notificationsCount() > 0 ? 'mobile-menu-notifications' : ''
+      styleClass: this.notificationsCount() > 0 ? 'mobile-menu-notifications' : '',
     },
     {
-      separator: true
+      separator: true,
     },
     {
       label: this.isDarkMode() ? 'Modo Claro' : 'Modo Oscuro',
       icon: this.isDarkMode() ? 'pi pi-sun' : 'pi pi-moon',
-      command: () => this.toggleDarkMode()
+      command: () => this.toggleDarkMode(),
     },
     {
-      separator: true
+      separator: true,
     },
     {
       label: 'Perfil de Usuario',
       icon: 'pi pi-user',
-      command: () => this.openUserProfile()
-    }
+      command: () => this.openUserProfile(),
+    },
   ]);
 
   ngOnInit() {
     this.checkScreenSize();
-    
+
     // Cerrar sidebar en móvil cuando se navega a una nueva ruta
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(() => {
-        if (this.isMobile()) {
-          this.sidebarVisible.set(false);
-        }
-      });
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+      if (this.isMobile()) {
+        this.sidebarVisible.set(false);
+      }
+    });
   }
 
   @HostListener('window:resize')
@@ -76,17 +85,17 @@ export class Layout implements OnInit {
     const target = event.target as HTMLElement;
     const sidebar = document.querySelector('.sidebar-transition');
     const menuButtons = document.querySelectorAll('[data-menu-button]');
-    
+
     // Si estamos en mobile y el sidebar está visible
     if (this.isMobile() && this.sidebarVisible()) {
       // Verificar si el clic fue en algún botón de menú
       let clickedMenuButton = false;
-      menuButtons.forEach(button => {
+      menuButtons.forEach((button) => {
         if (button.contains(target)) {
           clickedMenuButton = true;
         }
       });
-      
+
       // Si el clic no fue en el sidebar ni en ningún botón de menú
       if (sidebar && !sidebar.contains(target) && !clickedMenuButton) {
         this.sidebarVisible.set(false);
@@ -97,7 +106,7 @@ export class Layout implements OnInit {
   private checkScreenSize() {
     const isMobileSize = window.innerWidth <= 768;
     this.isMobile.set(isMobileSize);
-    
+
     // Si cambiamos a móvil, ocultar sidebar por defecto
     if (isMobileSize) {
       this.sidebarVisible.set(false);
@@ -111,34 +120,34 @@ export class Layout implements OnInit {
     {
       label: 'Dashboard',
       icon: 'pi pi-home',
-      route: PAGES_ROUTES.DASHBOARD.DASHBOARD
+      route: PAGES_ROUTES.DASHBOARD.DASHBOARD,
     },
     {
-      label: 'Juegos',
+      label: 'Tablas',
       icon: 'pi pi-play',
       items: [
-        { label: 'Activos', icon: 'pi pi-circle-fill', route: '/dashboard/games/active' },
-        { label: 'Historial', icon: 'pi pi-history', route: '/dashboard/games/history' }
-      ]
+        { label: 'Buscar', icon: 'pi pi-circle-fill', route:  `${PAGES_ROUTES.DASHBOARD.TABLAS.DEFAULT}/${PAGES_ROUTES.DASHBOARD.TABLAS.BUSCAR_TABLA}`},
+        { label: 'Historial', icon: 'pi pi-history', route: '/dashboard/games/history' },
+      ],
     },
     {
       label: 'Usuarios',
       icon: 'pi pi-users',
-      route: '/dashboard/users'
+      route: '/dashboard/users',
     },
     {
       label: 'Reportes',
       icon: 'pi pi-chart-line',
       items: [
         { label: 'Ventas', icon: 'pi pi-dollar', route: '/dashboard/reports/sales' },
-        { label: 'Jugadores', icon: 'pi pi-user', route: '/dashboard/reports/players' }
-      ]
+        { label: 'Jugadores', icon: 'pi pi-user', route: '/dashboard/reports/players' },
+      ],
     },
     {
       label: 'Configuración',
       icon: 'pi pi-cog',
-      route: '/dashboard/settings'
-    }
+      route: '/dashboard/settings',
+    },
   ];
 
   // Datos de ejemplo para las estadísticas
@@ -146,11 +155,11 @@ export class Layout implements OnInit {
     { title: 'Juegos Activos', value: '12', icon: 'pi pi-play', color: 'text-green-500' },
     { title: 'Jugadores Conectados', value: '248', icon: 'pi pi-users', color: 'text-blue-500' },
     { title: 'Ventas Hoy', value: '$1,234', icon: 'pi pi-dollar', color: 'text-purple-500' },
-    { title: 'Total Cartones', value: '1,856', icon: 'pi pi-grid', color: 'text-orange-500' }
+    { title: 'Total Cartones', value: '1,856', icon: 'pi pi-grid', color: 'text-orange-500' },
   ];
 
   toggleSidebar() {
-    this.sidebarVisible.update(visible => !visible);
+    this.sidebarVisible.update((visible) => !visible);
   }
 
   toggleDarkMode() {

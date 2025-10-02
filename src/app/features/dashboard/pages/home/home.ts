@@ -15,7 +15,7 @@ import { AvatarModule } from 'primeng/avatar';
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
-export class Home {
+export default class Home {
   // Datos de ejemplo para las estadísticas
   stats = [
     { title: 'Juegos Activos', value: '12', icon: 'pi pi-play', color: 'text-green-500' },

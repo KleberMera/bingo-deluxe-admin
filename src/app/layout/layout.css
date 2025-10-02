@@ -151,14 +151,57 @@ nav {
   border-radius: 8px;
 }
 
+/* Indicador lateral para elementos activos con Tailwind */
+.menu-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: rgb(37 99 235); /* blue-600 */
+  border-radius: 0 2px 2px 0;
+  transform: scaleY(0);
+  transition: transform 0.2s ease-in-out;
+}
+
+.menu-item:hover::before {
+  transform: scaleY(1);
+}
+
+/* Mostrar indicador para elementos activos usando clases de Tailwind */
+.menu-item.bg-blue-100::before {
+  transform: scaleY(1);
+}
+
+/* Dark mode - mostrar indicador para elementos activos */
+:host-context(.dark) .menu-item::before {
+  background: rgb(59 130 246); /* blue-500 for better contrast in dark mode */
+}
+
 /* Centrar iconos cuando sidebar está colapsado */
 .sidebar-transition.w-16 .menu-item {
   justify-content: center;
- /* // padding-left: 0; */
   padding-right: 0;
   margin: 4px 0; /* Agregar margen vertical para mejor espaciado */
   width: 100%; /* Asegurar que ocupe todo el ancho disponible */
   display: flex; /* Asegurar que sea flex */
+}
+
+/* Estilos especiales para elementos activos cuando está colapsado usando Tailwind */
+.sidebar-transition.w-16 .menu-item.bg-blue-100 {
+  border-radius: 8px;
+}
+
+/* Mostrar indicador incluso cuando está colapsado para elementos activos */
+.sidebar-transition.w-16 .menu-item.bg-blue-100::before {
+  display: block;
+  transform: scaleY(1);
+}
+
+/* Ocultar el indicador cuando está colapsado (excepto para activos) */
+.sidebar-transition.w-16 .menu-item:not(.bg-blue-100)::before {
+  display: none;
 }
 
 /* Asegurar que los iconos tengan el tamaño correcto */
@@ -170,6 +213,12 @@ nav {
   align-items: center;
   justify-content: center;
   margin: 0; /* Eliminar cualquier margen */
+}
+
+/* Color del icono activo cuando está colapsado usando Tailwind */
+.sidebar-transition.w-16 .menu-item.bg-blue-100 i,
+.sidebar-transition.w-16 .menu-item.text-blue-600 i {
+  color: rgb(37 99 235) !important; /* blue-600 */
 }
 
 .menu-item:hover {
@@ -194,14 +243,7 @@ nav {
   transition: transform 0.2s ease-in-out;
 }
 
-.menu-item:hover::before {
-  transform: scaleY(1);
-}
 
-/* Ocultar el indicador cuando está colapsado */
-.sidebar-transition.w-16 .menu-item::before {
-  display: none;
-}
 
 /* User Section */
 .user-section {
