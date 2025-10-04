@@ -5,3 +5,14 @@
 
 /* Updated dark mode configuration for p-dark */
 @custom-variant dark (&:where(.p-dark, .p-dark *));
+
+/* Custom responsive utilities for xs breakpoint */
+@media (min-width: 475px) {
+  .xs\:inline {
+    display: inline;
+  }
+  
+  .xs\:hidden {
+    display: none;
+  }
+}
