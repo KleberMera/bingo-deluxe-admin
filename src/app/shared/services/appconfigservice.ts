@@ -26,7 +26,11 @@ export class AppConfigService {
     private initialized = false;
 
     constructor() {
-        this.appState.set({ ...this.loadAppState() });
+        const initialState = this.loadAppState();
+        this.appState.set({ ...initialState });
+        
+        // Aplicar el tema inmediatamente al inicializar
+        this.applyThemeImmediately(initialState);
 
         effect(() => {
             const state = this.appState();
@@ -38,6 +42,16 @@ export class AppConfigService {
             this.saveAppState(state);
             this.handleDarkModeTransition(state);
         });
+    }
+
+    private applyThemeImmediately(state: AppState): void {
+        if (isPlatformBrowser(this.platformId)) {
+            if (state.darkTheme) {
+                this.document.documentElement.classList.add('p-dark');
+            } else {
+                this.document.documentElement.classList.remove('p-dark');
+            }
+        }
     }
 
     private handleDarkModeTransition(state: AppState): void {
@@ -108,18 +122,28 @@ export class AppConfigService {
         if (isPlatformBrowser(this.platformId)) {
             const storedState = localStorage.getItem(this.STORAGE_KEY);
             if (storedState) {
-                return JSON.parse(storedState);
+                try {
+                    const parsedState = JSON.parse(storedState);
+                    // Si existe configuración guardada, la usamos
+                    return parsedState;
+                } catch (error) {
+                    console.warn('Error parsing stored app state, using defaults');
+                }
             }
         }
-        return {
+        // Solo si no hay configuración previa, aplicamos modo oscuro por defecto
+        const defaultState = {
             preset: 'Aura',
             primary: 'noir',
             surface: null,
-            darkTheme: false,
+            darkTheme: true, // Modo oscuro por defecto
             menuActive: false,
             designerKey: 'primeng-designer-theme',
             RTL: false
         };
+        
+        console.log('Aplicando configuración por defecto con modo oscuro');
+        return defaultState;
     }
 
     private saveAppState(state: any): void {
