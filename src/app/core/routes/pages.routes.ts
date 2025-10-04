@@ -15,6 +15,7 @@ export const PAGES_ROUTES = {
     REGISTRADORES:{
       DEFAULT: 'registradores',
       PANEL: 'panel',
+      TIPOS: 'tipos',
     }
 
   },

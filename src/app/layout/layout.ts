@@ -119,20 +119,23 @@ export class Layout implements OnInit {
   menuItems = [
     {
       label: 'Dashboard',
-      icon: 'pi pi-home',
+      icon: 'pi pi-desktop', // icono de dashboard
       route: PAGES_ROUTES.DASHBOARD.DASHBOARD,
     },
     {
       label: 'Registradores',
-      icon: 'pi pi-id-card', // icono relacionado con registro/identidad
-      route: `${PAGES_ROUTES.DASHBOARD.REGISTRADORES.DEFAULT}/${PAGES_ROUTES.DASHBOARD.REGISTRADORES.PANEL}`,
+      icon: 'pi pi-id-card', // icono de identificador
+      items: [
+        { label: 'Panel', icon: 'pi pi-th-large', route: `${PAGES_ROUTES.DASHBOARD.REGISTRADORES.DEFAULT}/${PAGES_ROUTES.DASHBOARD.REGISTRADORES.PANEL}` },
+        { label: 'Tipos', icon: 'pi pi-list', route: `${PAGES_ROUTES.DASHBOARD.REGISTRADORES.DEFAULT}/${PAGES_ROUTES.DASHBOARD.REGISTRADORES.TIPOS}` },
+      ],
     },
     {
       label: 'Tablas',
       icon: 'pi pi-table', // icono de tabla
       items: [
-        { label: 'Crear', icon: 'pi pi-plus-circle', route:  `${PAGES_ROUTES.DASHBOARD.TABLAS.DEFAULT}/${PAGES_ROUTES.DASHBOARD.TABLAS.BUSCAR_TABLA}`},
-        { label: 'Historial', icon: 'pi pi-history', route: '/dashboard/games/history' },
+        { label: 'Crear', icon: 'pi pi-plus', route: `${PAGES_ROUTES.DASHBOARD.TABLAS.DEFAULT}/${PAGES_ROUTES.DASHBOARD.TABLAS.BUSCAR_TABLA}` },
+        { label: 'Historial', icon: 'pi pi-clock', route: '/dashboard/games/history' },
       ],
     },
     {
