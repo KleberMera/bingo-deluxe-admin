@@ -150,6 +150,29 @@ export class Layout implements OnInit {
     },
   ];
 
+  // Controla qué items del menú están expandidos (por label)
+  expanded = signal<string[]>([]);
+
+  isExpanded(label: string) {
+    return this.expanded().includes(label);
+  }
+
+  toggleMenuItem(label: string, event?: Event) {
+    // Evitar que un <a> con routerLink navegue si venimos del clic que quiere alternar el submenu
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    this.expanded.update((items) => {
+      const exists = items.includes(label);
+      if (exists) {
+        return items.filter((l) => l !== label);
+      }
+      return [...items, label];
+    });
+  }
+
   // Datos de ejemplo para las estadísticas
   stats = [
     { title: 'Juegos Activos', value: '12', icon: 'pi pi-play', color: 'text-green-500' },
@@ -159,7 +182,14 @@ export class Layout implements OnInit {
   ];
 
   toggleSidebar() {
-    this.sidebarVisible.update((visible) => !visible);
+    this.sidebarVisible.update((visible) => {
+      const newVisible = !visible;
+      if (!newVisible) {
+        // Al ocultar la sidebar, colapsar todos los submenus
+        this.expanded.set([]);
+      }
+      return newVisible;
+    });
   }
 
   toggleDarkMode() {

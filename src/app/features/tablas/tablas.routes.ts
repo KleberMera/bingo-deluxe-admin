@@ -8,9 +8,11 @@ export const tablasRoutes: Routes = [
     children: [
       {
         path: PAGES_ROUTES.DASHBOARD.TABLAS.BUSCAR_TABLA,
-        loadComponent: () => import('./pages/buscar-tablas/buscar-tablas'),
+        loadComponent: () => import('./pages/buscar-tablas/buscar-tablas')
       },
     ],
   },
 ];
+
+export default tablasRoutes;
 

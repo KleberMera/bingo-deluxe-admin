@@ -80,29 +80,43 @@
           <li *ngFor="let item of menuItems">
             <!-- Menu Item -->
             <div class="group">
-              <a [routerLink]="item.route || ''" 
-                 routerLinkActive="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 shadow-inner font-semibold"
-                 [routerLinkActiveOptions]="{ exact: true }"
-                 class="menu-item flex items-center gap-3 px-3 py-3 rounded-lg text-surface-700 dark:text-surface-200 hover:bg-surface-100 dark:hover:bg-surface-800 transition-all duration-200 cursor-pointer">
-                <i [class]="item.icon + ' text-lg flex-shrink-0'"></i>
-                <span [class]="'menu-text-transition overflow-hidden ' + (sidebarVisible() ? 'w-auto opacity-100' : 'w-0 opacity-0')" 
-                      class="whitespace-nowrap">{{ item.label }}</span>
-                <i *ngIf="item.items && sidebarVisible()" 
-                   class="pi pi-chevron-down text-xs ml-auto transition-transform group-hover:rotate-180"></i>
-              </a>
-              
-              <!-- Submenu -->
-              <ul *ngIf="item.items && sidebarVisible()" class="ml-6 mt-2 space-y-1">
-                <li *ngFor="let subItem of item.items">
-                  <a [routerLink]="subItem.route || ''" 
-                     routerLinkActive="bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 font-semibold"
-                     [routerLinkActiveOptions]="{ exact: true }"
-                     class="flex items-center gap-3 px-3 py-2 rounded-lg text-surface-600 dark:text-surface-300 hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors cursor-pointer">
-                    <i [class]="subItem.icon + ' text-sm flex-shrink-0'"></i>
-                    <span class="whitespace-nowrap text-sm">{{ subItem.label }}</span>
-                  </a>
-                </li>
-              </ul>
+              <!-- Si el item tiene subitems, usamos un botón que alterna el submenu -->
+              <ng-container *ngIf="item.items && item.items.length; else singleLink">
+                <a href="#" 
+                   (click)="toggleMenuItem(item.label, $event)"
+                   class="menu-item flex items-center gap-3 px-3 py-3 rounded-lg text-surface-700 dark:text-surface-200 hover:bg-surface-100 dark:hover:bg-surface-800 transition-all duration-200 cursor-pointer">
+                  <i [class]="item.icon + ' text-lg flex-shrink-0'"></i>
+                  <span [class]="'menu-text-transition overflow-hidden ' + (sidebarVisible() ? 'w-auto opacity-100' : 'w-0 opacity-0')" 
+                        class="whitespace-nowrap">{{ item.label }}</span>
+            <i *ngIf="sidebarVisible()" class="pi pi-chevron-down text-xs ml-auto transition-transform"
+              [class.rotate-180]="isExpanded(item.label) && sidebarVisible()"></i>
+                </a>
+
+                <!-- Submenu: ahora depende de isExpanded además de sidebarVisible -->
+                <ul *ngIf="item.items && sidebarVisible() && isExpanded(item.label)" class="ml-6 mt-2 space-y-1">
+                  <li *ngFor="let subItem of item.items">
+                    <a [routerLink]="subItem.route || ''" 
+                       routerLinkActive="bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 font-semibold"
+                       [routerLinkActiveOptions]="{ exact: true }"
+                       class="flex items-center gap-3 px-3 py-2 rounded-lg text-surface-600 dark:text-surface-300 hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors cursor-pointer">
+                      <i [class]="subItem.icon + ' text-sm flex-shrink-0'"></i>
+                      <span class="whitespace-nowrap text-sm">{{ subItem.label }}</span>
+                    </a>
+                  </li>
+                </ul>
+              </ng-container>
+
+              <!-- Item sin subitems: link normal -->
+              <ng-template #singleLink>
+                <a [routerLink]="item.route || ''" 
+                   routerLinkActive="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 shadow-inner font-semibold"
+                   [routerLinkActiveOptions]="{ exact: true }"
+                   class="menu-item flex items-center gap-3 px-3 py-3 rounded-lg text-surface-700 dark:text-surface-200 hover:bg-surface-100 dark:hover:bg-surface-800 transition-all duration-200 cursor-pointer">
+                  <i [class]="item.icon + ' text-lg flex-shrink-0'"></i>
+                  <span [class]="'menu-text-transition overflow-hidden ' + (sidebarVisible() ? 'w-auto opacity-100' : 'w-0 opacity-0')" 
+                        class="whitespace-nowrap">{{ item.label }}</span>
+                </a>
+              </ng-template>
             </div>
           </li>
         </ul>
