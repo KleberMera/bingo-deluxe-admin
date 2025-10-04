@@ -11,7 +11,12 @@ export const PAGES_ROUTES = {
     TABLAS: {
       DEFAULT: 'tablas',
       BUSCAR_TABLA: 'buscar-tablas',
+    },
+    REGISTRADORES:{
+      DEFAULT: 'registradores',
+      PANEL: 'panel',
     }
+
   },
 };
 export default PAGES_ROUTES;

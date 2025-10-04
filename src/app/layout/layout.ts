@@ -123,21 +123,26 @@ export class Layout implements OnInit {
       route: PAGES_ROUTES.DASHBOARD.DASHBOARD,
     },
     {
+      label: 'Registradores',
+      icon: 'pi pi-id-card', // icono relacionado con registro/identidad
+      route: `${PAGES_ROUTES.DASHBOARD.REGISTRADORES.DEFAULT}/${PAGES_ROUTES.DASHBOARD.REGISTRADORES.PANEL}`,
+    },
+    {
       label: 'Tablas',
-      icon: 'pi pi-play',
+      icon: 'pi pi-table', // icono de tabla
       items: [
-        { label: 'Buscar', icon: 'pi pi-circle-fill', route:  `${PAGES_ROUTES.DASHBOARD.TABLAS.DEFAULT}/${PAGES_ROUTES.DASHBOARD.TABLAS.BUSCAR_TABLA}`},
+        { label: 'Crear', icon: 'pi pi-plus-circle', route:  `${PAGES_ROUTES.DASHBOARD.TABLAS.DEFAULT}/${PAGES_ROUTES.DASHBOARD.TABLAS.BUSCAR_TABLA}`},
         { label: 'Historial', icon: 'pi pi-history', route: '/dashboard/games/history' },
       ],
     },
     {
       label: 'Usuarios',
-      icon: 'pi pi-users',
+      icon: 'pi pi-users', // icono de usuarios
       route: '/dashboard/users',
     },
     {
       label: 'Reportes',
-      icon: 'pi pi-chart-line',
+      icon: 'pi pi-chart-bar', // icono de reporte/gráfica
       items: [
         { label: 'Ventas', icon: 'pi pi-dollar', route: '/dashboard/reports/sales' },
         { label: 'Jugadores', icon: 'pi pi-user', route: '/dashboard/reports/players' },
@@ -145,7 +150,7 @@ export class Layout implements OnInit {
     },
     {
       label: 'Configuración',
-      icon: 'pi pi-cog',
+      icon: 'pi pi-cog', // icono de configuración
       route: '/dashboard/settings',
     },
   ];

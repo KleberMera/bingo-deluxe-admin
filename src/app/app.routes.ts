@@ -36,6 +36,10 @@ export const routes: Routes = [
             path: PAGES_ROUTES.DASHBOARD.DEFAULT,
             loadChildren: () => import('./features/tablas/tablas.routes')
           },
+                    {
+            path: PAGES_ROUTES.DASHBOARD.DEFAULT,
+            loadChildren: () => import('./features/registradores/registradores.routes')
+          },
         ],
       },
     ],
