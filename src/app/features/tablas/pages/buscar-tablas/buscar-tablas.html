@@ -17,7 +17,9 @@
 
 	<div *ngIf="loading()" class="text-center text-blue-600 mb-2">Buscando...</div>
 	<div *ngIf="error()" class="text-center text-red-600 mb-2">{{ error() }}</div>
-	<div *ngIf="mensaje() && !usuario()" class="text-center text-yellow-700 mb-2">{{ mensaje() }}</div>
+	<div *ngIf="mensaje() && !usuario()" class="text-center text-yellow-700 mb-2">
+		{{ mensaje() === 'Usuario no encontrado, puede continuar' ? 'Usuario no encontrado' : mensaje() }}
+	</div>
 
 	<!-- Usuario encontrado en la brigada actual, editable -->
 	<div *ngIf="existe() && usuario() && brigadaActual()" class="mt-4 p-4 bg-green-50 dark:bg-green-900/20 border border-green-300 rounded">
