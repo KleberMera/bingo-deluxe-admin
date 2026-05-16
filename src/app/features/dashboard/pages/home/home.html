@@ -1,5 +1,30 @@
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <p-card *ngFor="let stat of stats" class="text-center">
+        <!-- Primer stat: Total Registros -->
+        <p-card class="text-center">
+          <div class="flex flex-col items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-surface-100 dark:bg-surface-800 flex items-center justify-center">
+              <i class="pi pi-database text-xl text-green-500"></i>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-surface-900 dark:text-surface-0">{{ totalRegistros }}</div>
+              <div class="text-surface-600 dark:text-surface-400 text-sm">Total Registros</div>
+            </div>
+          </div>
+        </p-card>
+        <!-- Segundo stat: Total Tablas -->
+        <p-card class="text-center">
+          <div class="flex flex-col items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-surface-100 dark:bg-surface-800 flex items-center justify-center">
+              <i class="pi pi-table text-xl text-blue-500"></i>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-surface-900 dark:text-surface-0">{{ totalTablas }}</div>
+              <div class="text-surface-600 dark:text-surface-400 text-sm">Total Tablas</div>
+            </div>
+          </div>
+        </p-card>
+        <!-- Stats estáticos -->
+        <p-card *ngFor="let stat of stats.slice(2)" class="text-center">
           <div class="flex flex-col items-center gap-3">
             <div class="w-12 h-12 rounded-full bg-surface-100 dark:bg-surface-800 flex items-center justify-center">
               <i [class]="stat.icon + ' text-xl ' + stat.color"></i>
@@ -12,27 +37,25 @@
         </p-card>
       </div>
 
+
       <!-- Content Grid -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <!-- Recent Games -->
-        <p-card header="Juegos Recientes">
-          <div class="space-y-4">
-            <div *ngFor="let game of [1,2,3,4,5]" class="flex items-center justify-between p-3 bg-surface-50 dark:bg-surface-800 rounded-lg">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-primary text-primary-contrast flex items-center justify-center font-bold">
-                  #{{ game }}
-                </div>
-                <div>
-                  <div class="font-medium text-surface-900 dark:text-surface-0">Bingo Game {{ game }}</div>
-                  <div class="text-surface-600 dark:text-surface-400 text-sm">{{ 15 + game }} jugadores</div>
-                </div>
+        <!-- Resumen por tipo de registrador -->
+        <p-card header="Resumen por tipo de registrador">
+          <div *ngIf="resumenLoading" class="text-center text-blue-600 py-4">Cargando resumen...</div>
+          <div *ngIf="resumenError" class="text-center text-red-600 py-4">{{ resumenError }}</div>
+          <ng-container *ngIf="!resumenLoading && !resumenError">
+            <div *ngIf="resumen.length === 0" class="text-center text-gray-500 py-4">No hay datos de resumen.</div>
+            <div *ngFor="let item of resumen" class="flex items-center justify-between p-3 bg-surface-50 dark:bg-surface-800 rounded-lg mb-2">
+              <div>
+                <div class="font-medium text-surface-900 dark:text-surface-0">{{ item.ACTIVIDAD }}</div>
+                <div class="text-surface-600 dark:text-surface-400 text-sm">Registros: {{ item.CANTIDAD_REGISTROS }}</div>
               </div>
               <div class="text-right">
-                <div class="text-green-500 font-medium">Activo</div>
-                <div class="text-surface-600 dark:text-surface-400 text-sm">{{ 5 + game }}:{{ 30 + game * 2 }} min</div>
+                <div class="text-blue-600 font-bold">Tablas: {{ item.CANTIDAD_TABLAS }}</div>
               </div>
             </div>
-          </div>
+          </ng-container>
         </p-card>
 
         <!-- Top Players -->
