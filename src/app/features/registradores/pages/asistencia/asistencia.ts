@@ -107,5 +107,6 @@ export default class AsistenciaPage {
     };
 
     return new Intl.DateTimeFormat('es-EC', opciones).format(fecha);
+    
   }
 }
