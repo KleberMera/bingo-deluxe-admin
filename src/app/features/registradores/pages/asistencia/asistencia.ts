@@ -106,7 +106,16 @@ export default class AsistenciaPage {
       hour12: false,
     };
 
-    return new Intl.DateTimeFormat('es-EC', opciones).format(fecha);
+    const partes = new Intl.DateTimeFormat('es-EC', opciones).formatToParts(fecha);
+    const valores: Record<string, string> = {};
+
+    partes.forEach((parte) => {
+      if (parte.type !== 'literal') {
+        valores[parte.type] = parte.value;
+      }
+    });
+
+    return `${valores['day']}/${valores['month']}/${valores['year']} ${valores['hour']}:${valores['minute']}`;
     
   }
 }
