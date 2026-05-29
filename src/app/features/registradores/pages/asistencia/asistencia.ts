@@ -1,6 +1,6 @@
 import { httpResource } from '@angular/common/http';
 import { Component, computed, signal } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { toast } from 'ngx-sonner';
 import API_ROUTES from '../../../../core/routes/api.routes';
@@ -9,7 +9,7 @@ import { exportToExcel, sanitizeFileName } from '../../../../shared/utils/excel-
 
 @Component({
   selector: 'app-asistencia',
-  imports: [CommonModule, FormsModule, DatePipe],
+  imports: [CommonModule, FormsModule],
   templateUrl: './asistencia.html',
   styleUrl: './asistencia.css',
 })
@@ -78,7 +78,7 @@ export default class AsistenciaPage {
       Cédula: item.cedula,
       Celular: item.celular,
       Brigada: item.nombre_brigada,
-      'Fecha registro': this.formatFecha(item.created_at),
+      'Fecha registro': this.formatFechaRegistro(item.created_at),
     }));
 
     const brigadaNombre = this.brigadaActiva()?.nombre_brigada ?? 'asistencia';
@@ -89,13 +89,26 @@ export default class AsistenciaPage {
     toast.success('Archivo Excel descargado.');
   }
 
-  private formatFecha(iso: string): string {
-    return new Date(iso).toLocaleString('es-EC', {
+  formatFechaRegistro(iso: string): string {
+    const fecha = new Date(iso);
+
+    if (Number.isNaN(fecha.getTime())) {
+      return iso;
+    }
+
+    const partes = new Intl.DateTimeFormat('es-EC', {
+      timeZone: 'America/Guayaquil',
       day: '2-digit',
       month: '2-digit',
       year: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
-    });
+      hour12: false,
+    }).formatToParts(fecha);
+
+    const valor = (tipo: Intl.DateTimeFormatPartTypes) =>
+      partes.find((p) => p.type === tipo)?.value ?? '';
+
+    return `${valor('day')}/${valor('month')}/${valor('year')} ${valor('hour')}:${valor('minute')}`;
   }
 }
