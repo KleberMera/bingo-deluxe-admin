@@ -13,6 +13,10 @@ export const tablasRoutes: Routes = [
       {
         path: PAGES_ROUTES.DASHBOARD.REGISTRADORES.TIPOS,
         loadComponent: () => import('./pages/tipos-registradores/tipos-registradores')
+      },
+      {
+        path: PAGES_ROUTES.DASHBOARD.REGISTRADORES.ASISTENCIA,
+        loadComponent: () => import('./pages/asistencia/asistencia')
       }
     ],
   },

@@ -1,9 +1,12 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, httpResource } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import API_ROUTES from '../../../core/routes/api.routes';
 import { apiResponse } from '../../../core/interfaces/apiResponse';
-import { RegistrarAsistenciaRequest } from '../interfaces/asistencia.interface';
+import {
+  AsistenciaBrigadaActivaResponse,
+  RegistrarAsistenciaRequest,
+} from '../interfaces/asistencia.interface';
 import { environment } from '../../../../environments/environment';
 
 export interface RegistrarAsistenciaInput {
@@ -19,6 +22,11 @@ export interface RegistrarAsistenciaInput {
 export class srvAsistencia {
   private readonly _http = inject(HttpClient);
   urlApi = environment.apiUrl;
+
+  listBrigadaActivaResource = httpResource<AsistenciaBrigadaActivaResponse>(
+    () => API_ROUTES.ASISTENCIA_BRIGADA_ACTIVA,
+  );
+
   registrar(data: RegistrarAsistenciaInput): Observable<apiResponse<unknown>> {
     const payload: RegistrarAsistenciaRequest = {
       nombres: data.nombres.trim().toUpperCase(),

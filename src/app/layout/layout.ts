@@ -128,6 +128,8 @@ export class Layout implements OnInit {
       items: [
         { label: 'Panel', icon: 'pi pi-th-large', route: `${PAGES_ROUTES.DASHBOARD.REGISTRADORES.DEFAULT}/${PAGES_ROUTES.DASHBOARD.REGISTRADORES.PANEL}` },
         { label: 'Tipos', icon: 'pi pi-list', route: `${PAGES_ROUTES.DASHBOARD.REGISTRADORES.DEFAULT}/${PAGES_ROUTES.DASHBOARD.REGISTRADORES.TIPOS}` },
+        { label: 'Asistencia', icon: 'pi pi-user', route: `${PAGES_ROUTES.DASHBOARD.REGISTRADORES.DEFAULT}/${PAGES_ROUTES.DASHBOARD.REGISTRADORES.ASISTENCIA}` },
+     
       ],
     },
     {
