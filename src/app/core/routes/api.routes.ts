@@ -5,5 +5,6 @@ export const API_ROUTES = {
     LOGIN: `${environment.apiUrl}/auth/login`,
     REGISTER: `${environment.apiUrl}/auth/register`,
   },
+  ASISTENCIA: `${environment.apiUrl}/asistencia/`,
 };
 export default API_ROUTES;

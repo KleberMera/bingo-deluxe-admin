@@ -15,6 +15,10 @@ export const routes: Routes = [
         path: PAGES_ROUTES.AUTH.DEFAULT,
         loadChildren: () => import('./features/auth/auth.routes'),
       },
+      {
+        path: PAGES_ROUTES.REGISTRO.DEFAULT,
+        loadChildren: () => import('./features/registro/registro.routes'),
+      },
       // {
       //   path: PAGES_ROUTES.DASHBOARD.DASHBOARD,
       //   loadComponent: () => import('./features/dashboard/home/home').then(m => m.Home),

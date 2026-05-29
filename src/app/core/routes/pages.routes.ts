@@ -5,6 +5,9 @@ export const PAGES_ROUTES = {
     SIGNUP: 'sign-up',
     FORGOTPASSWORD: 'forgot-password',
   },
+  REGISTRO: {
+    DEFAULT: 'registro',
+  },
   DASHBOARD: {
     DEFAULT: '',
     DASHBOARD: 'dashboard',

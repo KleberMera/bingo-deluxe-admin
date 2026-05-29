@@ -1,0 +1,123 @@
+<div class="bg-surface-50 dark:bg-surface-950 sm:px-6 min-h-screen flex items-center relative">
+  <button
+    pTooltip="Cambiar tema"
+    type="button"
+    class="absolute top-4 right-4 p-3 rounded-full bg-surface-0 dark:bg-surface-800 hover:bg-surface-100 dark:hover:bg-surface-700 shadow-md transition-all duration-300 flex items-center justify-center w-12 h-12"
+    (click)="toggleDarkMode()"
+  >
+    <i
+      class="pi text-surface-700 dark:text-surface-200"
+      [ngClass]="{ 'pi-moon': isDarkMode(), 'pi-sun': !isDarkMode() }"
+    ></i>
+  </button>
+
+  <div
+    class="bg-surface-300 dark:bg-surface-900 p-6 sm:p-8 md:p-6 shadow-sm rounded-2xl w-full max-w-sm mx-auto flex flex-col gap-6 sm:gap-8"
+  >
+    <div class="flex flex-col items-center gap-2 w-full">
+      <div class="text-surface-900 dark:text-surface-0 text-xl sm:text-2xl font-semibold leading-tight text-center w-full">
+        Registro
+      </div>
+      <p class="text-surface-700 dark:text-surface-200 text-sm sm:text-base text-center">
+        Completa tus datos para continuar
+      </p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 sm:gap-6 w-full">
+      <div class="flex flex-col gap-2 w-full">
+        <label for="nombres" class="text-surface-900 dark:text-surface-0 font-medium leading-normal text-sm sm:text-base">
+          Nombres
+        </label>
+        <input
+          pInputText
+          id="nombres"
+          type="text"
+          formControlName="nombres"
+          placeholder="Tus nombres"
+          class="w-full px-3 py-3 shadow-sm rounded-lg text-sm sm:text-base"
+          [class.ng-invalid]="form.controls.nombres.touched && form.controls.nombres.invalid"
+        />
+        @if (form.controls.nombres.touched && form.controls.nombres.hasError('required')) {
+          <small class="text-red-500">Los nombres son obligatorios</small>
+        }
+      </div>
+
+      <div class="flex flex-col gap-2 w-full">
+        <label for="apellidos" class="text-surface-900 dark:text-surface-0 font-medium leading-normal text-sm sm:text-base">
+          Apellidos
+        </label>
+        <input
+          pInputText
+          id="apellidos"
+          type="text"
+          formControlName="apellidos"
+          placeholder="Tus apellidos"
+          class="w-full px-3 py-3 shadow-sm rounded-lg text-sm sm:text-base"
+          [class.ng-invalid]="form.controls.apellidos.touched && form.controls.apellidos.invalid"
+        />
+        @if (form.controls.apellidos.touched && form.controls.apellidos.hasError('required')) {
+          <small class="text-red-500">Los apellidos son obligatorios</small>
+        }
+      </div>
+
+      <div class="flex flex-col gap-2 w-full">
+        <label for="cedula" class="text-surface-900 dark:text-surface-0 font-medium leading-normal text-sm sm:text-base">
+          Cédula
+        </label>
+        <input
+          pInputText
+          id="cedula"
+          type="text"
+          formControlName="cedula"
+          placeholder="Ej: 1234567890"
+          maxlength="10"
+          inputmode="numeric"
+          class="w-full px-3 py-3 shadow-sm rounded-lg text-sm sm:text-base"
+          [class.ng-invalid]="form.controls.cedula.touched && form.controls.cedula.invalid"
+        />
+        @if (form.controls.cedula.touched && form.controls.cedula.hasError('required')) {
+          <small class="text-red-500">La cédula es obligatoria</small>
+        }
+      </div>
+
+      <div class="flex flex-col gap-2 w-full">
+        <label for="celular" class="text-surface-900 dark:text-surface-0 font-medium leading-normal text-sm sm:text-base">
+          Celular
+        </label>
+        <input
+          pInputText
+          id="celular"
+          type="tel"
+          formControlName="celular"
+          placeholder="Ej: 0987654321"
+          maxlength="10"
+          inputmode="numeric"
+          class="w-full px-3 py-3 shadow-sm rounded-lg text-sm sm:text-base"
+          [class.ng-invalid]="form.controls.celular.touched && form.controls.celular.invalid"
+        />
+        @if (form.controls.celular.touched && form.controls.celular.hasError('required')) {
+          <small class="text-red-500">El celular es obligatorio</small>
+        }
+        @if (form.controls.celular.touched && form.controls.celular.hasError('pattern')) {
+          <small class="text-red-500">Ingresa un celular válido de 10 dígitos numéricos</small>
+        }
+      </div>
+
+      <button
+        pRipple
+        pButton
+        type="submit"
+        [disabled]="enviando()"
+        class="w-full py-3 rounded-lg flex justify-center items-center gap-2 text-sm sm:text-base font-medium"
+      >
+        @if (enviando()) {
+          <p-progressSpinner strokeWidth="4" [style]="{ width: '1.25rem', height: '1.25rem' }" />
+          <span pButtonLabel>Enviando...</span>
+        } @else {
+          <i pButtonIcon class="pi pi-send text-base! leading-normal!"></i>
+          <span pButtonLabel>Enviar</span>
+        }
+      </button>
+    </form>
+  </div>
+</div>
