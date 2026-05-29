@@ -96,7 +96,7 @@ export default class AsistenciaPage {
       return iso;
     }
 
-    const partes = new Intl.DateTimeFormat('es-EC', {
+    const opciones: Intl.DateTimeFormatOptions = {
       timeZone: 'America/Guayaquil',
       day: '2-digit',
       month: '2-digit',
@@ -104,11 +104,8 @@ export default class AsistenciaPage {
       hour: '2-digit',
       minute: '2-digit',
       hour12: false,
-    }).formatToParts(fecha);
+    };
 
-    const valor = (tipo: Intl.DateTimeFormatPartTypes) =>
-      partes.find((p) => p.type === tipo)?.value ?? '';
-
-    return `${valor('day')}/${valor('month')}/${valor('year')} ${valor('hour')}:${valor('minute')}`;
+    return new Intl.DateTimeFormat('es-EC', opciones).format(fecha);
   }
 }
