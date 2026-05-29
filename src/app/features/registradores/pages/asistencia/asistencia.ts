@@ -2,8 +2,10 @@ import { httpResource } from '@angular/common/http';
 import { Component, computed, signal } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { toast } from 'ngx-sonner';
 import API_ROUTES from '../../../../core/routes/api.routes';
 import { Asistencia, AsistenciaBrigadaActivaResponse } from '../../../registro/interfaces/asistencia.interface';
+import { exportToExcel, sanitizeFileName } from '../../../../shared/utils/excel-export';
 
 @Component({
   selector: 'app-asistencia',
@@ -55,5 +57,45 @@ export default class AsistenciaPage {
 
   nombreCompleto(item: Asistencia): string {
     return `${item.nombres} ${item.apellidos}`;
+  }
+
+  canExport(): boolean {
+    return !this.listResource.isLoading() && !this.hasApiError() && this.filteredAsistencias().length > 0;
+  }
+
+  exportarExcel(): void {
+    const items = this.filteredAsistencias();
+
+    if (items.length === 0) {
+      toast.warning('No hay datos para exportar.');
+      return;
+    }
+
+    const rows = items.map((item, index) => ({
+      '#': index + 1,
+      Nombres: item.nombres,
+      Apellidos: item.apellidos,
+      Cédula: item.cedula,
+      Celular: item.celular,
+      Brigada: item.nombre_brigada,
+      'Fecha registro': this.formatFecha(item.created_at),
+    }));
+
+    const brigadaNombre = this.brigadaActiva()?.nombre_brigada ?? 'asistencia';
+    const fecha = new Date().toISOString().slice(0, 10);
+    const fileName = `asistencia_${sanitizeFileName(brigadaNombre)}_${fecha}`;
+
+    exportToExcel(rows, fileName, 'Asistencia');
+    toast.success('Archivo Excel descargado.');
+  }
+
+  private formatFecha(iso: string): string {
+    return new Date(iso).toLocaleString('es-EC', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
   }
 }
