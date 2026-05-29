@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import API_ROUTES from '../../../core/routes/api.routes';
 import { apiResponse } from '../../../core/interfaces/apiResponse';
 import { RegistrarAsistenciaRequest } from '../interfaces/asistencia.interface';
+import { environment } from '../../../../environments/environment';
 
 export interface RegistrarAsistenciaInput {
   nombres: string;
@@ -17,7 +18,7 @@ export interface RegistrarAsistenciaInput {
 })
 export class srvAsistencia {
   private readonly _http = inject(HttpClient);
-
+  urlApi = environment.apiUrl;
   registrar(data: RegistrarAsistenciaInput): Observable<apiResponse<unknown>> {
     const payload: RegistrarAsistenciaRequest = {
       nombres: data.nombres.trim().toUpperCase(),
@@ -26,6 +27,6 @@ export class srvAsistencia {
       celular: data.celular.trim(),
     };
 
-    return this._http.post<apiResponse<unknown>>(API_ROUTES.ASISTENCIA, payload);
+    return this._http.post<apiResponse<unknown>>(this.urlApi + '/asistencia', payload);
   }
 }
