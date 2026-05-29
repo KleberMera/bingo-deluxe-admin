@@ -6,7 +6,7 @@ export const PAGES_ROUTES = {
     FORGOTPASSWORD: 'forgot-password',
   },
   REGISTRO: {
-    DEFAULT: 'registro',
+    DEFAULT: 'asistencia',
   },
   DASHBOARD: {
     DEFAULT: '',
