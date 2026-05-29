@@ -117,5 +117,7 @@ export default class AsistenciaPage {
 
     return `${valores['day']}/${valores['month']}/${valores['year']} ${valores['hour']}:${valores['minute']}`;
     
+
+    ////
   }
 }
