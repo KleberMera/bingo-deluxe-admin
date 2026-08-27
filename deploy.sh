@@ -26,7 +26,7 @@ ng build --base-href /bingo-admin/
 echo ""
 echo "📂 Publicando archivos..."
 
-sudo rsync -av --delete dist/SCE/browser/ /var/www/bingo-admin/
+sudo rsync -av --delete dist/bingo-deluxe-admin/browser/ /var/www/bingo-admin/
 
 echo ""
 echo "✅ BINGO AMIGO desplegado correctamente."
