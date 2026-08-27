@@ -20,7 +20,7 @@ echo "🏗️ Compilando Bingo Amigo Admin..."
 
 # ng build
 #npm run build
-ng build --base-href /bingo-admin/
+ng build --base-href /bingoadmin/
 # ng build --configuration production --base-href /controlelectoral/
 
 echo ""
