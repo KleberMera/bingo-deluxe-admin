@@ -19,14 +19,14 @@ echo ""
 echo "🏗️ Compilando Bingo Amigo Admin..."
 
 # ng build
-npm run build
+#npm run build
 ng build --base-href /bingo-admin/
 # ng build --configuration production --base-href /controlelectoral/
 
 echo ""
 echo "📂 Publicando archivos..."
 
-sudo rsync -av --delete build/ /var/www/bingo-admin/
+sudo rsync -av --delete dist/SCE/browser/ /var/www/bingo-admin/
 
 echo ""
 echo "✅ BINGO AMIGO desplegado correctamente."
